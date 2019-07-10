@@ -12,6 +12,7 @@ class ReadingThreadTest extends TestCase
 {
 
   use DatabaseMigrations;
+  use RefreshDatabase;
 
     /**
      * A basic feature test example.
@@ -51,13 +52,14 @@ class ReadingThreadTest extends TestCase
     /**
      * @test
      */
-//    function a_user_can_read_replies_that_are_associated_with_thread() {
-//      /* Generate 1 reply */
-//      $reply = factory(Reply::class)
-//        ->create(['thread_id' => $this->thread->id]);
-//
-//      $this->get('/threads/'. $this->thread->id)
-//        ->assertSee($reply->body);
-//    }
+    function a_user_can_read_replies_that_are_associated_with_thread() {
+      /* Generate 1 reply */
+      $this->withExceptionHandling();
+      $reply = factory(Reply::class)
+        ->create(['thread_id' => $this->thread->id]);
+
+      $this->get('/threads/'. $this->thread->id)
+        ->assertSee($reply->body);
+    }
 
 }

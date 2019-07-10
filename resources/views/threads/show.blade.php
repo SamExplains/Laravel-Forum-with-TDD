@@ -17,5 +17,25 @@
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        @foreach($thread->replies as $reply)
+          <div class="card mt-2">
+            <div class="card-header">
+              {{ $reply->created_at }}
+            </div>
+            <div class="card-body">
+              {{ $reply->body }}
+            </div>
+          </div>
+        @endforeach
+      </div>
+    </div>
+
   </div>
 @endsection
+
+
+
+
