@@ -45,7 +45,7 @@ class ReadingThreadTest extends TestCase
      * @test
      */
     public function a_user_can_read_a_single_thread(){
-      $this->get('/threads/' . $this->thread->id)
+      $this->get($this->thread->path())
         ->assertSee($this->thread->title);
     }
 
@@ -58,7 +58,7 @@ class ReadingThreadTest extends TestCase
       $reply = factory(Reply::class)
         ->create(['thread_id' => $this->thread->id]);
 
-      $this->get('/threads/'. $this->thread->id)
+      $this->get($this->thread->path())
         ->assertSee($reply->body);
     }
 
