@@ -29,6 +29,24 @@
       </div>
     </div>
 
+    @if (auth()->check())
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <form method="POST" action="{{ $thread->path() . '/replies' }}">
+          <div class="form-group">
+            {{ csrf_field() }}
+            <label for="body">Body</label>
+            <textarea class="form-control" name="body" id="body" rows="5" placeholder="Have something to say?"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Post</button>
+        </form>
+      </div>
+    </div>
+    @else
+      <p class="text-center">Please <a href="{{ route('login') }}">sign in</a> to add to the discussion</p>
+    @endif
+
   </div>
 @endsection
 
