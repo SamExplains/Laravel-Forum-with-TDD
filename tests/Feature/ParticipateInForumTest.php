@@ -44,7 +44,32 @@ class ParticipateInForumTest extends TestCase
       $this->get($thread->path())
         ->assertSee($reply->body);
 
-//      dd($reply->toArray());
+    }
+
+    /**
+     *@test
+     */
+    public function a_reply_requires_a_body(){
+      $this->withExceptionHandling()->signIn();
+      $thread = create('App\Thread');
+      $reply = make('App\Reply', ['body' => null]);
+
+      $this->post($thread->path().'/replies', $reply->toArray())
+        ->assertSessionHasErrors('body');
+    }
+
+    /**
+     *@test
+     */
+    public function a_user_can_filter_threads_according_to_a_tag(){
+      $channel = create('App\Channel');
+      $threadInChannel = create('App\Thread', ['channel_id' => $channel->id]);
+      $threadNotInChannel = create('App\Thread');
+
+      $this->get('/threads/'. $channel->slug)
+        ->assertSee($threadInChannel->title)
+        ->assertDontSee($threadNotInChannel->title);
 
     }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Channel;
 use App\Thread;
 use Illuminate\Http\Request;
 
@@ -9,20 +10,37 @@ class ThreadController extends Controller
 {
     public function __construct()
     {
-      $this->middleware('auth')->except(['index', 'show']);
+//      $this->middleware('auth')->except(['index', 'show']);
+      $this->middleware('auth')->except(['index', 'show', 'channel']);
     }
 
   /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+   * Display a listing of the resource.
+   *
+   * @param Channel $channel
+   * @return \Illuminate\Http\Response
+   */
+    public function index(Channel $channel)
     {
-        //
+      if ($channel->exists) {
+        $threads = $channel->threads()->latest()->get();
+      } else {
+        $threads = Thread::latest()->get();
+      }
 
-      return view('threads.index')->with('threads', Thread::latest()->get());
+      return view('threads.index', compact('threads'));
     }
+
+  public function channel(Channel $channel)
+  {
+    if ($channel->exists) {
+      $threads = $channel->threads()->latest()->get();
+    } else {
+      $threads = Thread::latest()->get();
+    }
+
+    return view('threads.index', compact('threads'));
+  }
 
     /**
      * Show the form for creating a new resource.
@@ -34,15 +52,22 @@ class ThreadController extends Controller
       return view('threads.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request $request
+   * @return \Illuminate\Http\Response
+   * @throws \Illuminate\Validation\ValidationException
+   */
     public function store(Request $request)
     {
-//      dd($request->all());
+
+      $this->validate($request, [
+        'title' => 'required',
+        'body' => 'required',
+        'channel_id' => 'required|exists:channels,id'
+      ]);
+
       $thread = Thread::create([
                   'user_id' => auth()->id(),
                   'channel_id' => $request->channel_id,

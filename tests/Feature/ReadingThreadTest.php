@@ -49,7 +49,7 @@ class ReadingThreadTest extends TestCase
     /**
      * @test
      */
-    function a_user_can_read_replies_that_are_associated_with_thread() {
+    function a_user_can_read_replies_that_are_associated_with_channel() {
       /* Generate 1 reply */
       $this->withExceptionHandling();
       $reply = factory(Reply::class)

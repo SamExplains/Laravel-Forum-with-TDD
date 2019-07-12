@@ -36,6 +36,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('threads.index') }}">All Threads</a>
                         </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ route('threads.create') }}">New Thread</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
