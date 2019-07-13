@@ -39,6 +39,24 @@
                         <li class="nav-item">
                           <a class="nav-link" href="{{ route('threads.create') }}">New Thread</a>
                         </li>
+
+                      <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                          Browse
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                          <li class="dropdown-item">
+                            <a href="/threads">All Threads</a>
+                          </li>
+                          @if (auth()->check())
+                          <li class="dropdown-item">
+                            <a href="/threads?by={{ auth()->user()->name }}">My Threads</a>
+                          </li>
+                          @endif
+                        </ul>
+                      </li>
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 Channels
