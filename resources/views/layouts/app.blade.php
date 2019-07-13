@@ -39,6 +39,19 @@
                         <li class="nav-item">
                           <a class="nav-link" href="{{ route('threads.create') }}">New Thread</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Channels
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                              @foreach($channels as $channel)
+                                <li class="dropdown-item">
+                                  <a href="/threads/{{ $channel->slug }}">{{ $channel->name }}</a>
+                                </li>
+                              @endforeach
+                            </ul>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
