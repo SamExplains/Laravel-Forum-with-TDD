@@ -1,7 +1,7 @@
 <div class="card mt-3 mb-3">
   <div class="card-header">
     <div class="level">
-      <a href="#">
+      <a href="{{ route('profile', $reply->owner) }}">
         {{ $reply->owner->name }} said {{ $reply->created_at->diffForHumans() }}
       </a>
 
