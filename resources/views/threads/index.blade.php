@@ -4,26 +4,26 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <div class="card">
           <div class="card-header">Forum Threads</div>
+        @foreach($threads as $thread)
+            <div class="card mb-4">
 
-          <div class="card-body">
-            @foreach($threads as $thread)
-              <article>
-                <h4>
-                  <a href="{{ $thread->path() }}">{{ $thread->title }}</a>
-                </h4>
-                <a href="{{ $thread->path() }}">{{ $thread->replies_count }} {{ str_plural('reply', $thread->replies_count) }}</a>
-                <div class="body">
-                  {{ $thread->body }}
-                </div>
+              <div class="card-body">
+                  <article>
+                    <h4>
+                      <a href="{{ $thread->path() }}">{{ $thread->title }}</a>
+                     <a class="float-right d-inline-block" style="font-size: .8rem" href="{{ $thread->path() }}">{{ $thread->replies_count }} {{ str_plural('reply', $thread->replies_count) }}</a>
+                    </h4>
+                    <div class="body">
+                      {{ $thread->body }}
+                    </div>
 
-                <hr>
+                    <hr>
 
-              </article>
-            @endforeach
-          </div>
-        </div>
+                  </article>
+              </div>
+            </div>
+        @endforeach
       </div>
     </div>
   </div>
