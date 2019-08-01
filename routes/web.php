@@ -21,9 +21,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('threads/create', 'ThreadController@create');
 Route::get('threads/{channel}/{thread}', 'ThreadController@show');
+Route::delete('threads/{channel}/{thread}', 'ThreadController@destroy');
 Route::get('threads/{channel}', 'ThreadController@index');
 Route::post('threads/{channel}/{thread}/replies', 'RepliesController@store');
-Route::get('profiles/{user}', 'ProfilesController@show');
+Route::get('profiles/{user}', 'ProfilesController@show')->name('profile');
 
 Route::resources([
   'threads' => 'ThreadController'

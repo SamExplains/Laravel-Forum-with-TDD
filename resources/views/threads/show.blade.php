@@ -7,6 +7,15 @@
         <div class="card">
           <div class="card-header">
             <a href="{{ '/profiles/' . $thread->creator->name }}">{{ $thread->creator->name }} posted: </a>
+
+              <div class="float-right">
+                  <form action="{{ $thread->path() }}" method="post">
+                      {{ csrf_field() }}
+                      {{ method_field('delete') }}
+                      <button type="submit" class="btn btn-link">Delete Thread</button>
+                  </form>
+              </div>
+
             {{ $thread->title }}
           </div>
 
