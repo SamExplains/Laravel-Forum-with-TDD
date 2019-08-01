@@ -79,7 +79,7 @@ class CreateThreadsTest extends TestCase
 
         $response = $this->delete($thread->path());
 //        $response->assertRedirect('/');
-        $response->assertStatus(405);
+        $response->assertStatus(302);
     }
 
     /**
@@ -92,7 +92,7 @@ class CreateThreadsTest extends TestCase
 
         $response = $this->json('DELETE', $thread->path());
 //        $this->assertDatabaseMissing('threads', $thread->toArray());
-        $response->assertStatus(405);
+        $response->assertStatus(302);
         $this->assertDatabaseMissing('threads', array($thread));
         $this->assertDatabaseMissing('replies', array($reply->id));
     }
@@ -112,7 +112,7 @@ class CreateThreadsTest extends TestCase
       $this->withExceptionHandling();
       $this->signIn();
       $thread = make('App\Thread', $overrides);
-      return $this->post('/threads/destroy', $thread->toArray());
+      return $this->post('/threads', $thread->toArray());
     }
 
 

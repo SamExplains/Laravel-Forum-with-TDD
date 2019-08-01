@@ -128,7 +128,7 @@ class ThreadController extends Controller
 
         if (request()->wantsJson()) {
             //        return response([], 204);
-            return response([], 405);
+            return response([], 302);
         }
         return redirect('/threads');
 
