@@ -1,8 +1,26 @@
 <div class="card mt-3 mb-3">
   <div class="card-header">
+<<<<<<< HEAD
     <a href="{{ '/profiles/' . $reply->owner->name }}">
       {{ $reply->owner->name }} said {{ $reply->created_at->diffForHumans() }}
     </a>
+=======
+    <div class="level">
+      <a href="{{ route('profile', $reply->owner) }}">
+        {{ $reply->owner->name }} said {{ $reply->created_at->diffForHumans() }}
+      </a>
+
+      <div class="d-inline-block float-right">
+        <form action="/replies/{{ $reply->id }}/favorites" method="post">
+          {{ csrf_field() }}
+          <button type="submit" class="btn btn-primary" {{ $reply->isFavorited() ? 'disabled' : '' }}>
+            {{ $reply->favorites_count }} {{ str_plural('Favorite', $reply->favorites_count) }}
+          </button>
+        </form>
+      </div>
+      
+    </div>
+>>>>>>> f526dfba409dcfbd7ed8500b4b47b14588b086cc
   </div>
   <div class="card-body">
     {{ $reply->body }}

@@ -46,6 +46,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+<<<<<<< HEAD
     /**
      *
      */
@@ -57,6 +58,15 @@ class User extends Authenticatable
     public function getRouteKeyName()
     {
         return 'name';
+=======
+    public function getRouteKeyName()
+    {
+      return 'name';
+    }
+
+    public function threads() {
+      return $this->hasMany(Thread::class)->latest();
+>>>>>>> f526dfba409dcfbd7ed8500b4b47b14588b086cc
     }
 
 

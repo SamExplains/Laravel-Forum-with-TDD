@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Favorite;
+use App\Reply;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class ProfilesController extends Controller
+class FavoritesController extends Controller
 {
-    /**
-<<<<<<< HEAD
-     * @param User $user
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function show(User $user) {
-        return view('profiles.show', ['profileUser' => $user, 'threads' => $user->threads()->paginate(30)]);
-=======
+
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
+  /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -34,29 +35,27 @@ class ProfilesController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param Reply $reply
+   * @return void
+   */
+    public function store(Reply $reply)
     {
-        //
+      $reply->favorite();
+      return back();
     }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param User $user
-   * @return \Illuminate\Http\Response
-   */
-    public function show(User $user)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-        return view('profile.show', [
-          'profileUser' => $user,
-          'threads' => $user->threads()->paginate(30)
-        ]);
+        //
     }
 
     /**
@@ -91,6 +90,5 @@ class ProfilesController extends Controller
     public function destroy($id)
     {
         //
->>>>>>> f526dfba409dcfbd7ed8500b4b47b14588b086cc
     }
 }
