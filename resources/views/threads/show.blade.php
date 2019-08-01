@@ -8,6 +8,7 @@
           <div class="card-header">
             <a href="{{ '/profiles/' . $thread->creator->name }}">{{ $thread->creator->name }} posted: </a>
 
+              @can('update', $thread)
               <div class="float-right">
                   <form action="{{ $thread->path() }}" method="post">
                       {{ csrf_field() }}
@@ -15,8 +16,8 @@
                       <button type="submit" class="btn btn-link">Delete Thread</button>
                   </form>
               </div>
+              @endcan
 
-            <a href="{{ route('profile', $thread->creator) }}">{{ $thread->creator->name }} posted: </a>
             {{ $thread->title }}
           </div>
 
