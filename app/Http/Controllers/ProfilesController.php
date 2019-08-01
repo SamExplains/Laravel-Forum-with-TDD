@@ -8,13 +8,15 @@ use Illuminate\Http\Request;
 class ProfilesController extends Controller
 {
     /**
-<<<<<<< HEAD
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(User $user) {
+    public function show(User $user)
+    {
         return view('profiles.show', ['profileUser' => $user, 'threads' => $user->threads()->paginate(30)]);
-=======
+    }
+
+        /*
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -43,20 +45,6 @@ class ProfilesController extends Controller
     public function store(Request $request)
     {
         //
-    }
-
-  /**
-   * Display the specified resource.
-   *
-   * @param User $user
-   * @return \Illuminate\Http\Response
-   */
-    public function show(User $user)
-    {
-        return view('profile.show', [
-          'profileUser' => $user,
-          'threads' => $user->threads()->paginate(30)
-        ]);
     }
 
     /**
@@ -91,6 +79,5 @@ class ProfilesController extends Controller
     public function destroy($id)
     {
         //
->>>>>>> f526dfba409dcfbd7ed8500b4b47b14588b086cc
     }
 }
