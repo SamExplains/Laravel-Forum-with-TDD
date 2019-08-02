@@ -6,9 +6,9 @@
       <div class="col-md-8">
         <div class="card">
           <div class="card-header">
-            <a href="{{ '/profiles/' . $thread->creator->name }}">{{ $thread->creator->name }} posted: </a>
+            <a href="{{ '/profiles/' . $thread->creator->name }}">{{ $thread->creator->name }} </a>  posted:
 
-              @can('update', $thread)
+          @can('update', $thread)
               <div class="float-right">
                   <form action="{{ $thread->path() }}" method="post">
                       {{ csrf_field() }}

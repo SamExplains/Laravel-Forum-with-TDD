@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use ReflectionException;
 
 /**
  * App\Thread
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Thread extends Model
 {
+    use RecordsActivity;
     //
 
   protected $guarded = [];
@@ -30,9 +32,12 @@ class Thread extends Model
         $thread->replies()->delete();
     });
 
+
+
+
   }
 
-  public function path()
+    public function path()
   {
     return "/threads/{$this->channel->slug}/{$this->id}";
   }
@@ -58,8 +63,6 @@ class Thread extends Model
   public function scopeFilter($query, $filters){
     return $filters->apply($query);
   }
-
-
 
 
 
